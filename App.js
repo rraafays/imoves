@@ -1,17 +1,23 @@
 import { StatusBar } from 'expo-status-bar'; // make expo aware of device statusbar
 import { StyleSheet, Text, View } from 'react-native'; // stylsheet for theming, text for text, view for displaying things
 
-import firebase from 'firebase/app'; // ability to establish connection to firebase
+import { Provider } from 'react-redux'; // allows us to select a provider to store states
+import { createStore, applyMiddleware } from 'redux'; // allows us to create and use a store
+import thunk from 'redux-thunk'; // allows us to use functions that can work with our store
+import rootReducer from './src/redux/reducers'
 
+import firebase from 'firebase/app'; // ability to establish connection to firebase
 import credentials from './credentials' // email rraf@tuta.io for credentials file
+import AuthScreen from './src/screens/auth';
 if (firebase.apps.length == 0) { credentials } // if firebase is not running, run it
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>i will become an app called imoves</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <AuthScreen />
+    </Provider>
   );
 }
 
