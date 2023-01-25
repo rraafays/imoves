@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import AuthMenu from '../../components/auth/menu';
+import styles from './styles';
 
 export default function AuthScreen() {
   return (
-    <View>
-      <Text>i will authenticate users for imoves</Text>
+    <View style={styles.container}>
+      <Image source={require('../../../assets/logo.png')}></Image>
+      <AuthMenu />
     </View>
   )
 }
