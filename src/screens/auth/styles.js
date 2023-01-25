@@ -1,11 +1,20 @@
 import { StyleSheet } from 'react-native';
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#702F8A',
-    marginTop: 20,
+    marginTop: 30,
     alignItems: 'center',
-    padding: 20
+    padding: 30,
+    flex: 1
   },
+  video: {
+    position: 'absolute',
+    top: -100,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: -1
+  }
 });
 
 export default styles;

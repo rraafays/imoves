@@ -6,9 +6,6 @@ export default function AuthMenu() {
   return (
     <View style={styles.container}>
       <Text style={styles.header_text}>Sign-in</Text>
-      <TouchableOpacity>
-        <Text>test</Text>
-      </TouchableOpacity>
     </View>
   )
 }

@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#702F8A'
+    backgroundColor: '#702F8A',
+    padding: 20
   },
   header_text: {
     textAlign: 'center',
