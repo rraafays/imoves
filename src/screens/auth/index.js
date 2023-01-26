@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, Image } from 'react-native';
 import { Video } from 'expo-av';
+import { LinearGradient } from 'expo-linear-gradient';
 import AuthMenu from '../../components/auth/menu';
 import styles from './styles';
 
@@ -18,6 +19,7 @@ export default function AuthScreen() {
         rate={1}
         muted={true}
       />
+      <LinearGradient colors={['#000000', 'transparent']} style={styles.video} />
       <Image source={require('../../../assets/logo.png')}></Image>
       <AuthMenu />
     </View>
