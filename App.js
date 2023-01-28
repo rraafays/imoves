@@ -13,15 +13,15 @@ if (firebase.apps.length == 0) { credentials } // if firebase is not running, ru
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); // create store so that we can easily pass props
 
-export default function App() { // essentially the main function of react native
-  return ( // return the application javascript
-    <Provider store={store}> {/* wrap our screens in a provider tag which contains the store */}
-      <AuthScreen /> {/* render authentication screen */}
+export default function App() {
+  return (
+    <Provider store={store}>
+      <AuthScreen />
     </Provider>
   );
 }
 
-const styles = StyleSheet.create({ // TEMP: css stylesheet written in javascript
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
