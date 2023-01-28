@@ -11,17 +11,17 @@ import credentials from './credentials' // email rraf@tuta.io for credentials fi
 import AuthScreen from './src/screens/auth';
 if (firebase.apps.length == 0) { credentials } // if firebase is not running, run it
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk)); // create store so that we can easily pass props
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <AuthScreen />
+export default function App() { // essentially the main function of react native
+  return ( // return the application javascript
+    <Provider store={store}> {/* wrap our screens in a provider tag which contains the store */}
+      <AuthScreen /> {/* render authentication screen */}
     </Provider>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // TEMP: css stylesheet written in javascript
   container: {
     flex: 1,
     backgroundColor: '#fff',
