@@ -3,12 +3,34 @@ import { View, Text } from 'react-native'; // view for displaying things text fo
 import { TextInput, Button } from 'react-native-paper'; // input field and button components that look nice
 import { useWindowDimensions } from 'react-native' // to get the width of the screen
 import styles from './styles'; // styles in separate file
+import { useDispatch } from 'react-redux';
+import { sign_in } from '../../../redux/actions';
 
 
 export default function AuthMenu({ prompt_password, set_prompt_password }) { // we are passing boolean prompt_password and method set_prompt_password to set it
   const width = useWindowDimensions().width; // get the width of the screen
   const [email, set_email] = useState('')
   const [password, set_password] = useState('')
+
+  const dispatch = useDispatch()
+  const handle_sign_in = () => {
+    dispatch(sign_in(email, password))
+      .then(() => {
+        console.log('SIGN IN: SUCCESS')
+      })
+      .catch(() => {
+        console.log('SIGN IN: ERROR')
+      })
+  }
+  const handle_sign_up = () => {
+    dispatch(sign_up(email, password))
+      .then(() => {
+        console.log('SIGN UP: SUCCESS')
+      })
+      .catch(() => {
+        console.log('SIGN UP: ERROR')
+      })
+  }
   return (
     <View style={styles.container} >
       <Text style={styles.header_text}>Welcome</Text>
@@ -20,10 +42,13 @@ export default function AuthMenu({ prompt_password, set_prompt_password }) { // 
         onChangeText={(text) => set_email(text) & console.log(text)}
       />
       {
-        !prompt_password ?
+        prompt_password ?
           <Button style={styles.button}
             mode='contained'
-            onPress={() => prompt_password ? set_prompt_password(false) & console.log(prompt_password) : set_prompt_password(true) & console.log(prompt_password)}
+            onPress={() => {
+              if (prompt_password) { set_prompt_password(false) & console.log(prompt_password) }
+              if (!prompt_password) { set_prompt_password(true) & console.log(prompt_password) }
+            }}
             theme={{ colors: { outline: '#702F8A', primary: '#702F8A', secondary: '#E0E0E0' } }}
           >
             Continue
@@ -44,6 +69,6 @@ export default function AuthMenu({ prompt_password, set_prompt_password }) { // 
       >
         Sign-Up
       </Button>
-    </View>
+    </View >
   )
 }
