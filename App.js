@@ -9,7 +9,8 @@ import rootReducer from './src/redux/reducers'
 import firebase from 'firebase/app'; // ability to establish connection to firebase
 import credentials from './credentials' // email rraf@tuta.io for credentials file
 import AuthScreen from './src/screens/auth';
-if (firebase.apps.length == 0) { credentials } // if firebase is not running, run it
+
+credentials // initialise firebase using credentials
 
 const store = createStore(rootReducer, applyMiddleware(thunk)); // create store so that we can easily pass props
 

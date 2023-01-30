@@ -3,8 +3,9 @@ import { View, Text } from 'react-native'; // view for displaying things text fo
 import { TextInput, Button } from 'react-native-paper'; // input field and button components that look nice
 import { useWindowDimensions } from 'react-native' // to get the width of the screen
 import styles from './styles'; // styles in separate file
-import { useDispatch } from 'react-redux';
-import { sign_in } from '../../../redux/actions';
+import { useDispatch } from 'react-redux'; // allows us to dispatch data to redux actions
+import { sign_in } from '../../../redux/actions'; // sign in action
+import { sign_up } from '../../../redux/actions'; // sign up action
 
 
 export default function AuthMenu({ prompt_password, set_prompt_password }) { // we are passing boolean prompt_password and method set_prompt_password to set it
@@ -42,7 +43,7 @@ export default function AuthMenu({ prompt_password, set_prompt_password }) { // 
         onChangeText={(text) => set_email(text) & console.log(text)}
       />
       {
-        prompt_password ?
+        !prompt_password ?
           <Button style={styles.button}
             mode='contained'
             onPress={() => {
@@ -60,6 +61,8 @@ export default function AuthMenu({ prompt_password, set_prompt_password }) { // 
             style={{ backgroundColor: 'transparent', width: width * .7 }}
             theme={{ colors: { onSurfaceVariant: '#E0E0E0', onSurface: '#E0E0E0', primary: '#702F8A' } }}
             onChangeText={(text) => set_password(text) & console.log(text)}
+            secureTextEntry
+            onEndEditing={() => handle_sign_up()}
           />
       }
       <Button style={styles.button}
