@@ -7,8 +7,7 @@ import AuthMenu from '../../components/auth/menu';
 import styles from './styles';
 
 export default function AuthScreen() {
-  const [authPage, setAuthPage] = useState(0)
-  const [promptPassword, setPromptPassword] = useState(0)
+  const [prompt_password, set_prompt_password] = useState(0)
   return (
     <View style={styles.container}>
       <StatusBar style='light' />
@@ -24,10 +23,8 @@ export default function AuthScreen() {
       <LinearGradient colors={['#000000', 'transparent']} style={styles.video} />
       <Image source={require('../../../assets/logo.png')}></Image>
       <AuthMenu
-        authPage={authPage}
-        setAuthPage={setAuthPage}
-        promptPassword={promptPassword}
-        setPromptPassword={setPromptPassword}
+        prompt_password={prompt_password}
+        set_prompt_password={set_prompt_password}
       />
     </View>
   )

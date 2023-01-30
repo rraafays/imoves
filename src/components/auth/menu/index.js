@@ -1,13 +1,12 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
-import { useWindowDimensions } from 'react-native'
-import styles from './styles';
+import React from 'react'; // core framework
+import { View, Text } from 'react-native'; // view for displaying things text for displaying text
+import { TextInput, Button } from 'react-native-paper'; // input field and button components that look nice
+import { useWindowDimensions } from 'react-native' // to get the width of the screen
+import styles from './styles'; // styles in separate file
 
 
-export default function AuthMenu({ authPage, setAuthPage, promptPassword, setPromptPassword }) {
-  const width = useWindowDimensions().width;
-  const height = useWindowDimensions().height;
+export default function AuthMenu({ prompt_password, set_prompt_password }) { // we are passing boolean prompt_password and method set_prompt_password to set it
+  const width = useWindowDimensions().width; // get the width of the screen
 
   return (
     <View style={styles.container} >
@@ -19,10 +18,10 @@ export default function AuthMenu({ authPage, setAuthPage, promptPassword, setPro
         theme={{ colors: { onSurfaceVariant: '#E0E0E0', onSurface: '#E0E0E0', primary: '#702F8A' } }}
       />
       {
-        !promptPassword ?
+        !prompt_password ?
           <Button style={styles.button}
             mode='contained'
-            onPress={() => promptPassword ? setPromptPassword(false) & console.log(promptPassword) : setPromptPassword(true) & console.log(promptPassword)}
+            onPress={() => prompt_password ? set_prompt_password(false) & console.log(prompt_password) : set_prompt_password(true) & console.log(prompt_password)}
             theme={{ colors: { outline: '#702F8A', primary: '#702F8A', secondary: '#E0E0E0' } }}
           >
             Continue
