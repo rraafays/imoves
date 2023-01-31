@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; // core framework
-import { View, Text } from 'react-native'; // view for displaying things text for displaying text
+import { View, Text, ToastAndroid } from 'react-native'; // view for displaying things text for displaying text
 import { TextInput, Button } from 'react-native-paper'; // input field and button components that look nice
 import { useWindowDimensions } from 'react-native' // to get the width of the screen
 import styles from './styles'; // styles in separate file
@@ -12,6 +12,8 @@ export default function AuthMenu({ prompt_password, set_prompt_password }) { // 
   const width = useWindowDimensions().width; // get the width of the screen
   const [email, set_email] = useState('')
   const [password, set_password] = useState('')
+
+  const toast = (message) => { ToastAndroid.show(message, ToastAndroid.SHORT) }
 
   const dispatch = useDispatch()
   const handle_sign_in = () => {
@@ -62,12 +64,12 @@ export default function AuthMenu({ prompt_password, set_prompt_password }) { // 
             theme={{ colors: { onSurfaceVariant: '#E0E0E0', onSurface: '#E0E0E0', primary: '#702F8A' } }}
             onChangeText={(text) => set_password(text) & console.log(text)}
             secureTextEntry
-            onEndEditing={() => handle_sign_up()}
+            onEndEditing={() => handle_sign_in() & toast('signing in..')}
           />
       }
       <Button style={styles.button}
         mode='outlined'
-        onPress={() => console.log('sign them up')}
+        onPress={() => handle_sign_up() & toast('signing up..')}
         theme={{ colors: { outline: '#702F8A', primary: '#E0E0E0', secondary: '#E0E0E0' } }}
       >
         Sign-Up
