@@ -1,5 +1,18 @@
+import { USER_STATE_CHANGE } from '../constants'
+
 import firebase from 'firebase'
 require('firebase/firebase-auth')
+
+export const signed_in = () => dispatch => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(get_user_data())
+    }
+    else {
+      dispatch({ type: USER_STATE_CHANGE, currentUser: null, loaded: true })
+    }
+  })
+}
 
 export const sign_in = (email, password) =>
   dispatch =>
