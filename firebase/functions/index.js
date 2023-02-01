@@ -8,6 +8,6 @@ const database = root.firestore()
 exports.new_user = functions.auth.user().onCreate((user) => {
   return database
     .collection('user')
-    .doc(user.uuid)
+    .doc(user.uid)
     .create(JSON.parse(JSON.stringify(user)))
 })
