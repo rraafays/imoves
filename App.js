@@ -8,7 +8,9 @@ import rootReducer from './src/redux/reducers'
 
 import firebase from 'firebase/app'; // ability to establish connection to firebase
 import credentials from './credentials' // email rraf@tuta.io for credentials file
+
 import AuthScreen from './src/screens/auth';
+import Route from './src/navigation';
 
 credentials // initialise firebase using credentials
 
@@ -17,16 +19,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk)); // create store 
 export default function App() {
   return (
     <Provider store={store}>
-      <AuthScreen />
+      <Route />
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
