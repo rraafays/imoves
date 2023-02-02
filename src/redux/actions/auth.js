@@ -14,12 +14,18 @@ export const signed_in = () => dispatch => {
   })
 }
 
-export const get_user_data = () => {
+export const get_user_data = () => dispatch => {
   firebase.firestore()
     .collection('user')
     .doc(firebase.auth().currentUser.uid)
     .onSnapshot((res) => {
-      if (res.exists) { return dispatch({ type: USER_STATE_CHANGE, currentUser: res.data(), loaded: true }) }
+      if (res.exists) {
+        return dispatch({
+          type: USER_STATE_CHANGE,
+          currentUser: res.data(),
+          loaded: true
+        })
+      }
     })
 }
 
