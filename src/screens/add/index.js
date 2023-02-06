@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native'
+import { View, Text, Image, useWindowDimensions, TouchableOpacity } from 'react-native'
 import { Camera } from 'expo-camera'
 import { Audio } from 'expo-av'
 import * as ImagePicker from 'expo-image-picker'
@@ -34,13 +34,43 @@ export default function AddScreen() {
 
       if (gallery.status == 'granted') {
         const media = await MediaLibrary.getAssetsAsync({ sortBy: ['creationTime'], mediaType: ['video'] })
-        add_video(media)
+        add_video(media.assets)
       }
     })()
   }, [])
 
   const record_video = async () => {
+    if (camera_ref) {
+      try {
+        const options = { maxDuration: 60, quality: Camera.Constants.VideoQuality['480'] }
+        const video_record_promise = camera_ref.recordAsync(options)
+        if (video_record_promise) {
+          const data = await video_record_promise;
+          const source = data.uri;
+        }
+      }
+      catch (error) {
+        console.warn(error)
+      }
+    }
+  }
 
+  const stop_video = async () => {
+    if (camera_ref) {
+      camera_ref.stopRecording()
+    }
+  }
+
+  const open_picker = async () => {
+    let video = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 1
+    })
+    if (!video.canceled) {
+      // TODO: save the uri
+    }
   }
 
   if (!camera_permissions || !audio_permissions || !gallery_permissions) { return (<View></View>) }
@@ -60,11 +90,29 @@ export default function AddScreen() {
           null
       }
       <View style={styles.bottom_overlay}>
+        <View style={{ flex: 1 }}>
+
+        </View>
         <View style={styles.button_box}>
           <TouchableOpacity style={styles.record_button}
             disabled={!camera_ready}
             onLongPress={() => record_video()}
+            onPressOut={() => stop_video()}
           />
+        </View>
+        <View style={{ flex: 1 }}>
+          <TouchableOpacity style={styles.gallery_button}
+            onPress={() => open_picker()}
+          >
+            {
+              videos[0] == undefined ?
+                <></>
+                :
+                <Image style={styles.recent_video}
+                  source={{ uri: videos[0].uri }}
+                />
+            }
+          </TouchableOpacity>
         </View>
       </View>
     </View>

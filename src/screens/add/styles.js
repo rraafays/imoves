@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   bottom_overlay: {
     position: 'absolute',
     bottom: 0,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   button_box: {
     flex: 1,
@@ -34,6 +35,18 @@ const styles = StyleSheet.create({
     width: 80,
     alignSelf: 'center',
     marginBottom: 20
+  },
+  gallery_button: {
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+    borderRadius: 10,
+    overflow: 'hidden',
+    width: 50,
+    height: 50
+  },
+  recent_video: {
+    width: 50,
+    height: 50
   }
 });
 
