@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, Image, useWindowDimensions, TouchableOpacity } from 'react-native'
 import { Camera } from 'expo-camera'
 import { Audio } from 'expo-av'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { useIsFocused } from '@react-navigation/native'
@@ -89,9 +90,12 @@ export default function AddScreen() {
           :
           null
       }
+      <View style={styles.side_overlay}>
+        <MaterialCommunityIcons name='camera-flip' size={24} color='#FFFFFF' />
+        <Text style={{ color: '#FFFFFF', marginTop: 5 }}>flip</Text>
+      </View>
       <View style={styles.bottom_overlay}>
         <View style={{ flex: 1 }}>
-
         </View>
         <View style={styles.button_box}>
           <TouchableOpacity style={styles.record_button}

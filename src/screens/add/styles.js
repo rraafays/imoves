@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     zIndex: 0,
     aspectRatio: 9 / 16
   },
+  side_overlay: {
+    top: 60,
+    right: 0,
+    marginHorizontal: 20,
+    position: 'absolute'
+  },
   bottom_overlay: {
     position: 'absolute',
     bottom: 0,
