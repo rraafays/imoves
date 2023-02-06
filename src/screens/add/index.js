@@ -8,12 +8,17 @@ import { useIsFocused } from '@react-navigation/native'
 import styles from './styles'
 
 export default function AddScreen() {
+  const focus = useIsFocused()
+
   const [camera_permissions, set_camera_permissions] = useState(false)
   const [audio_permissions, set_audio_permissions] = useState(false)
   const [gallery_permissions, set_gallery_permissions] = useState(false)
 
   const [videos, add_video] = useState([])
-  const focus = useIsFocused()
+  const [camera_ref, set_camera_ref] = useState(null)
+  const [camera_type, set_camera_type] = useState(Camera.Constants.Type.back)
+  const [camera_flash, set_camera_flash] = useState(Camera.Constants.FlashMode.off)
+  const [camera_ready, set_camera_ready] = useState(false)
 
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
@@ -40,7 +45,12 @@ export default function AddScreen() {
       {
         focus ?
           <Camera
+            ref={ref => set_camera_ref(ref)}
             style={styles.camera}
+            ratio={'16:9'}
+            type={camera_type}
+            flashMode={camera_flash}
+            onCameraReady={() => camera_ready(true)}
           />
           :
           null
