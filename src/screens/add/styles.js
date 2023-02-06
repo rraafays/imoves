@@ -15,6 +15,25 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 0,
     aspectRatio: 9 / 16
+  },
+  bottom_overlay: {
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row'
+  },
+  button_box: {
+    flex: 1,
+    marginHorizontal: 30
+  },
+  record_button: {
+    borderWidth: 8,
+    borderColor: '#FF000060',
+    backgroundColor: '#FF0000',
+    borderRadius: 100,
+    height: 80,
+    width: 80,
+    alignSelf: 'center',
+    marginBottom: 20
   }
 });
 

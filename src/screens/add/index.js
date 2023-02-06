@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, useWindowDimensions } from 'react-native'
+import { View, Text, useWindowDimensions, TouchableOpacity } from 'react-native'
 import { Camera } from 'expo-camera'
 import { Audio } from 'expo-av'
 import * as ImagePicker from 'expo-image-picker'
@@ -39,6 +39,10 @@ export default function AddScreen() {
     })()
   }, [])
 
+  const record_video = async () => {
+
+  }
+
   if (!camera_permissions || !audio_permissions || !gallery_permissions) { return (<View></View>) }
   return (
     <View style={styles.container}>
@@ -50,11 +54,19 @@ export default function AddScreen() {
             ratio={'16:9'}
             type={camera_type}
             flashMode={camera_flash}
-            onCameraReady={() => camera_ready(true)}
+            onCameraReady={() => set_camera_ready(true)}
           />
           :
           null
       }
+      <View style={styles.bottom_overlay}>
+        <View style={styles.button_box}>
+          <TouchableOpacity style={styles.record_button}
+            disabled={!camera_ready}
+            onLongPress={() => record_video()}
+          />
+        </View>
+      </View>
     </View>
   )
 }
