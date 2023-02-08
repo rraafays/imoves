@@ -21,9 +21,6 @@ export default function AddScreen() {
   const [camera_flash, set_camera_flash] = useState(Camera.Constants.FlashMode.off)
   const [camera_ready, set_camera_ready] = useState(false)
 
-  const width = useWindowDimensions().width;
-  const height = useWindowDimensions().height;
-
   useEffect(() => {
     (async () => {
       const camera = await Camera.requestPermissionsAsync()
@@ -91,8 +88,28 @@ export default function AddScreen() {
           null
       }
       <View style={styles.side_overlay}>
-        <MaterialCommunityIcons name='camera-flip' size={24} color='#FFFFFF' />
-        <Text style={{ color: '#FFFFFF', marginTop: 5 }}>flip</Text>
+        <TouchableOpacity style={styles.side_button}
+          onPress={() => set_camera_type(camera_type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back)}
+        >
+          {
+            camera_type === Camera.Constants.Type.back ?
+              <MaterialCommunityIcons name='account' size={24} color='#FFFFFF' />
+              :
+              <MaterialCommunityIcons name='image' size={24} color='#FFFFFF' />
+          }
+          <Text style={{ color: '#FFFFFF', marginTop: 5 }}>flip</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.side_button}
+          onPress={() => set_camera_flash(camera_flash === Camera.Constants.FlashMode.off ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off)}
+        >
+          {
+            camera_flash === Camera.Constants.FlashMode.off ?
+              <MaterialCommunityIcons name='flash' size={24} color='#FFFFFF' />
+              :
+              <MaterialCommunityIcons name='flash' size={24} color='#FFF000' />
+          }
+          <Text style={{ color: '#FFFFFF', marginTop: 5 }}>flash</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.bottom_overlay}>
         <View style={{ flex: 1 }}>

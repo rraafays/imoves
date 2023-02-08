@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     position: 'absolute'
   },
+  side_button: {
+    alignItems: 'center',
+    marginBottom: 22
+  },
   bottom_overlay: {
     position: 'absolute',
     bottom: 0,
