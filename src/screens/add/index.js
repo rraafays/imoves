@@ -5,7 +5,7 @@ import { Audio } from 'expo-av'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
-import { useIsFocused } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
 import styles from './styles'
 
 export default function Add_Screen() {
@@ -20,6 +20,8 @@ export default function Add_Screen() {
   const [camera_type, set_camera_type] = useState(Camera.Constants.Type.back)
   const [camera_flash, set_camera_flash] = useState(Camera.Constants.FlashMode.off)
   const [camera_ready, set_camera_ready] = useState(false)
+
+  const NAVIGATION = useNavigation()
 
   useEffect(() => {
     (async () => {
@@ -45,6 +47,7 @@ export default function Add_Screen() {
         if (video_record_promise) {
           const data = await video_record_promise;
           const source = data.uri;
+
         }
       }
       catch (error) {
@@ -67,7 +70,7 @@ export default function Add_Screen() {
       quality: 1
     })
     if (!video.canceled) {
-      // TODO: save the uri
+      NAVIGATION.navigate('save')
     }
   }
 

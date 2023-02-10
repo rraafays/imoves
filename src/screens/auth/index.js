@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import AuthMenu from '../../components/auth/menu';
 import styles from './styles';
 
-export default function AuthScreen() {
+export default function Auth_Screen() {
   const [prompt_password, set_prompt_password] = useState(0)
   return (
     <View style={styles.container}>

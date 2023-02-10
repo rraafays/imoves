@@ -12,7 +12,7 @@ const TEST_SCREEN = () => {
   return (<View><Text>i am a placeholder</Text></View>)
 }
 
-export default function HomeScreen() {
+export default function Home_Screen() {
   return (
     <Tab.Navigator
       barStyle={{ backgroundColor: '#000000' }}

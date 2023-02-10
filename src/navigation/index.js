@@ -5,8 +5,9 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { signed_in } from '../redux/actions'
-import AuthScreen from '../screens/auth'
-import HomeScreen from '../navigation/home'
+import Auth_Screen from '../screens/auth'
+import Home_Screen from '../navigation/home'
+import Save_Screen from '../screens/save'
 
 const stack = createStackNavigator()
 
@@ -31,9 +32,12 @@ export default function Route() {
       <stack.Navigator>
         {
           user.currentUser == null ?
-            <stack.Screen name='auth' component={AuthScreen} options={{ headerShown: false }} />
+            <stack.Screen name='auth' component={Auth_Screen} options={{ headerShown: false }} />
             :
-            <stack.Screen name='home' component={HomeScreen} options={{ headerShown: false }} />
+            <>
+              <stack.Screen name='home' component={Home_Screen} options={{ headerShown: false }} />
+              <stack.Screen name='save' component={Save_Screen} options={{ headerShown: false }} />
+            </>
         }
       </stack.Navigator>
     </NavigationContainer>
