@@ -8,7 +8,7 @@ import * as MediaLibrary from 'expo-media-library'
 import { useIsFocused } from '@react-navigation/native'
 import styles from './styles'
 
-export default function AddScreen() {
+export default function Add_Screen() {
   const focus = useIsFocused()
 
   const [camera_permissions, set_camera_permissions] = useState(false)

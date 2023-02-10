@@ -3,7 +3,8 @@ import { View, Text } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import AddScreen from '../../screens/add'
+import Add_Screen from '../../screens/add'
+import Profile_Screen from '../../screens/profile'
 
 const Tab = createMaterialBottomTabNavigator()
 
@@ -27,12 +28,12 @@ export default function HomeScreen() {
       />
       <Tab.Screen
         name='Add'
-        component={AddScreen}
+        component={Add_Screen}
         options={{ tabBarIcon: () => <MaterialCommunityIcons name='plus-circle' circle size={24} color={'#702F8A'} /> }}
       />
       <Tab.Screen
         name='Profile'
-        component={TEST_SCREEN}
+        component={Profile_Screen}
         options={{ tabBarIcon: () => <MaterialCommunityIcons name='baby-face' size={24} color={'#702F8A'} /> }}
       />
     </Tab.Navigator>
