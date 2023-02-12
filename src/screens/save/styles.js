@@ -1,14 +1,28 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, useWindowDimensions } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
     backgroundColor: '#702F8A'
   },
+  thumbnail: {
+    alignSelf: 'center',
+    aspectRatio: 1 / 1,
+    width: '100%'
+  },
   title: {
-    paddingVertical: 30,
     backgroundColor: '#E0E0E0'
+  },
+  buttons: {
+  },
+  cancel: {
+    backgroundColor: '#FF5555',
+    alignItems: 'center',
+    textAlign: 'center',
+    color: '#E0E0E0',
+    fontSize: 100,
+    width: '50%',
+    height: '100%'
   }
 })
 
