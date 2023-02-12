@@ -47,7 +47,7 @@ export default function Add_Screen() {
         if (video_record_promise) {
           const data = await video_record_promise;
           const source = data.uri;
-
+          NAVIGATION.navigate('save', { source })
         }
       }
       catch (error) {
@@ -70,7 +70,7 @@ export default function Add_Screen() {
       quality: 1
     })
     if (!video.canceled) {
-      NAVIGATION.navigate('save')
+      NAVIGATION.navigate('save', { source: video.uri })
     }
   }
 

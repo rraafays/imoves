@@ -1,10 +1,19 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
+import { TextInput } from 'react-native-paper'
+import styles from './styles'
 
-export default function Save_Screen() {
+export default function Save_Screen(props) {
   return (
-    <View>
-      <Text>i am the save screen</Text>
+    <View style={styles.container}>
+      <StatusBar style='light' />
+      <View>
+        <TextInput style={styles.title}
+          placeholder='Describe the video'
+          multiline={true}
+          maxLength={120}
+        />
+      </View>
     </View>
   )
 }
