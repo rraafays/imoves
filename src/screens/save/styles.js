@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#702F8A'
   },
-  thumbnail: {
+  video: {
     alignSelf: 'center',
     aspectRatio: 1 / 1,
     width: '100%'

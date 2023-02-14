@@ -1,7 +1,8 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { Video } from 'expo-av'
 import React from 'react'
-import { View, Text, StatusBar, Image } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { TextInput } from 'react-native-paper'
 import styles from './styles'
@@ -12,7 +13,12 @@ export default function Save_Screen(props) {
     <View style={styles.container}>
       <StatusBar style='light' />
       <View>
-        <Image style={styles.thumbnail}
+        <Video style={styles.video}
+          resizeMode='cover'
+          shouldPlay={true}
+          isLooping={true}
+          rate={1}
+          muted={true}
           source={{ uri: props.route.params.source }}
         />
         <TextInput style={styles.title}
