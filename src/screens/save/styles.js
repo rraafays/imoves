@@ -3,7 +3,7 @@ import { StyleSheet, useWindowDimensions } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#702F8A'
+    backgroundColor: '#000000'
   },
   video: {
     alignSelf: 'center',
@@ -14,15 +14,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0E0E0'
   },
   buttons: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    padding: 30
   },
   cancel: {
     backgroundColor: '#FF5555',
-    alignItems: 'center',
-    textAlign: 'center',
-    color: '#E0E0E0',
+    color: '#FFFFFF',
     fontSize: 100,
-    width: '50%',
-    height: '100%'
+    borderRadius: 100
+  },
+  confirm: {
+    backgroundColor: '#00FF55',
+    color: '#FFFFFF',
+    fontSize: 100,
+    borderRadius: 100
   }
 })
 

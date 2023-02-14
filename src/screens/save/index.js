@@ -28,11 +28,18 @@ export default function Save_Screen(props) {
         />
       </View>
       <View style={styles.buttons}>
-        <TouchableOpacity style={styles.cancel}
+        <TouchableOpacity style={{ padding: 25 }}
           onPress={() => NAVIGATION.goBack()}
         >
           <MaterialCommunityIcons style={styles.cancel}
-            name='cancel'
+            name="cancel"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ padding: 25 }}
+          onPress={() => NAVIGATION.goBack()}
+        >
+          <MaterialCommunityIcons style={styles.confirm}
+            name="checkbox-marked-circle-outline"
           />
         </TouchableOpacity>
       </View>
