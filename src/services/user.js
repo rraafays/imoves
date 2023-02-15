@@ -1,4 +1,4 @@
-import { save_media_to_storage } from "./randomise"
+import { save_media_to_storage } from "./random"
 import firebase from 'firebase'
 
 export const save_user_profile_image = (image) => new Promise((resolve, reject) => {
