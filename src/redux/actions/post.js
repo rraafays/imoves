@@ -7,13 +7,6 @@ import uuid from 'uuid-random'
 export const post = (description, video) =>
   dispatch =>
     new Promise((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(() => {
-          resolve()
-        })
-        .catch(() => {
-          reject()
-        })
       save_to_storage(video, `post/${firebase.auth().currentUser.uid}/${uuid()}`)
         .then((res) => {
           firebase.firestore()
@@ -21,7 +14,11 @@ export const post = (description, video) =>
             .add({
               creator: firebase.auth().currentUser.uid,
               downloadURL,
-              description
+              description,
+              creation: firebase.firestore.FieldValue.serverTimestamp()
             })
+            .then(() => resolve())
+            .catch(() => reject())
         })
+        .catch(() => reject())
     })
