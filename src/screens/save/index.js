@@ -17,7 +17,7 @@ export default function Save_Screen(props) {
   const dispatch = useDispatch()
   const handle_save_post = () => {
     set_request_running(true)
-    dispatch(post(description, props.route.params.source))
+    dispatch(post(description, props.route.params.source, props.route.params.thumbnail))
       .then(() => NAVIGATION.dispatch(StackActions.popToTop()))
       .catch(() => set_request_running(false))
   }

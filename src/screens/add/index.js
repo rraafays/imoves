@@ -3,6 +3,7 @@ import { View, Text, Image, useWindowDimensions, TouchableOpacity } from 'react-
 import { Camera } from 'expo-camera'
 import { Audio } from 'expo-av'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import * as VideoThumbnails from 'expo-video-thumbnails'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
@@ -47,7 +48,8 @@ export default function Add_Screen() {
         if (video_record_promise) {
           const data = await video_record_promise;
           const source = data.uri;
-          NAVIGATION.navigate('save', { source })
+          let thumbnail = await generate_thumbnail(source)
+          NAVIGATION.navigate('save', { source, thumbnail })
         }
       }
       catch (error) {
@@ -70,8 +72,22 @@ export default function Add_Screen() {
       quality: 1
     })
     if (!video.canceled) {
-      NAVIGATION.navigate('save', { source: video.uri })
+      let thumbnail = await generate_thumbnail(video.uri)
+      NAVIGATION.navigate('save', { source: video.uri, thumbnail })
     }
+  }
+
+  const generate_thumbnail = async (source) => {
+    try {
+      const { uri } = await VideoThumbnails.getThumbnailAsync(
+        source,
+        {
+          time: 1000
+        }
+      );
+      return uri;
+    }
+    catch (e) { }
   }
 
   if (!camera_permissions || !audio_permissions || !gallery_permissions) { return (<View></View>) }
