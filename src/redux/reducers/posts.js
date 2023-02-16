@@ -5,7 +5,7 @@ const initialState = {
   loaded: false
 }
 
-export const post = (state = initialState, action) => {
+export const posts = (state = initialState, action) => {
   switch (action.type) {
     case CURRENT_USER_POSTS_UPDATE: return { ...state, currentUserPosts: action.currentUserPosts, loaded: action.loaded }
     default: return state
