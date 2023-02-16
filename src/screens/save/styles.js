@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 100,
     borderRadius: 100
+  },
+  upload: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
