@@ -2,23 +2,19 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    padding: 30
+    flex: 1,
+    flexDirection: 'row',
+    padding: 30,
   },
-  profile: {
-    borderWidth: 20,
-    borderRadius: 100,
-    borderColor: '#702F8A'
+  status: {
+    flex: 1,
+    alignItems: 'center',
   },
   title: {
+    width: 130,
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#E0E0E0',
-    paddingTop: 30
-  },
-  avatar: {
-  },
-  name: {
+    backgroundColor: 'transparent'
   },
   coins: {
     fontSize: 30,
@@ -27,6 +23,10 @@ const styles = StyleSheet.create({
   },
   favourites: {
     marginTop: 30
+  },
+  profile: {
+    width: 130,
+    height: 130
   }
 })
 

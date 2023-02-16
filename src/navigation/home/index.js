@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Add_Screen from '../../screens/add'
 import Profile_Screen from '../../screens/profile'
+import Feed_Screen from '../../screens/feed'
 
 const Tab = createMaterialBottomTabNavigator()
 
@@ -23,7 +24,7 @@ export default function Home_Screen() {
     >
       <Tab.Screen
         name='Feed'
-        component={TEST_SCREEN}
+        component={Feed_Screen}
         options={{ tabBarIcon: () => <MaterialCommunityIcons name='home' size={24} color={'#702F8A'} /> }}
       />
       <Tab.Screen
