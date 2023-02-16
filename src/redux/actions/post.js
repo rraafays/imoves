@@ -29,7 +29,7 @@ export const post = (description, video, thumbnail) => dispatch => new Promise((
     })
     .catch(() => reject())
 })
-export const getPostsByUser = (uid = firebase.auth().currentUser.uid) => dispatch => new Promise((resolve, reject) => {
+export const get_posts_by_user = (uid = firebase.auth().currentUser.uid) => dispatch => new Promise((resolve, reject) => {
   firebase.firestore()
     .collection('post')
     .where('creator', '==', uid)
