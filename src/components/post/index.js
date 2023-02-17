@@ -3,9 +3,9 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react
 import { View, Text } from 'react-native'
 import styles from './styles'
 
-export const Post = forwardRef((props, parent_ref) => {
+export const Post = forwardRef((props, parentRef) => {
   const ref = useRef(null)
-  useImperativeHandle(parent_ref, () => ({
+  useImperativeHandle(parentRef, () => ({
     play, stop, unload
   }))
 
