@@ -3,7 +3,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react
 import { View, Text } from 'react-native'
 import styles from './styles'
 
-export const Post = forwardRef((props, parentRef) => {
+export const Post = forwardRef(({ item }, parentRef) => {
   const ref = useRef(null)
   useImperativeHandle(parentRef, () => ({
     play, stop, unload
@@ -52,7 +52,7 @@ export const Post = forwardRef((props, parentRef) => {
       shouldPlay={false}
       isLooping={true}
       rate={1}
-      source={{ uri: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4' }}
+      source={{ uri: item.media[0] }}
     />
   )
 })
