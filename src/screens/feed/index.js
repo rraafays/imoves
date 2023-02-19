@@ -1,4 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { View, Text } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { Dimensions } from 'react-native'
@@ -10,6 +11,8 @@ export default function Feed_Screen() {
   const array = [1, 2, 3, 4, 5, 6]
   const [posts, setPosts] = useState([])
   const mediaRefs = useRef([])
+
+  const x = useBottomTabBarHeight()
 
   useEffect(() => {
     getFeed().then(setPosts)
@@ -31,7 +34,7 @@ export default function Feed_Screen() {
 
   const renderItem = ({ item, index }) => {
     return (
-      <View style={[{ flex: 1, height: Dimensions.get('window').height }, index % 2 === 0 ? { backgroundColor: 'red' } : { backgroundColor: 'black' }]}>
+      <View style={[{ flex: 1, height: Dimensions.get('window').height - x }, index % 2 === 0 ? { backgroundColor: 'red' } : { backgroundColor: 'black' }]}>
         <Post item={item} ref={SinglePostRef => (mediaRefs.current[item.id] = SinglePostRef)} />
       </View >
     )
@@ -49,7 +52,7 @@ export default function Feed_Screen() {
           itemVisiblePercentThreshold: 70
         }}
         renderItem={renderItem}
-        pagingEnabled={false}
+        pagingEnabled={true}
         keyExtractor={item => item.id}
         onViewableItemsChanged={onViewableItemsChanged.current}
       />
