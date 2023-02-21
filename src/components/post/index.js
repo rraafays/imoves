@@ -36,6 +36,7 @@ export const Single_Post = forwardRef(({ item }, parent_ref) => {
       ref={ref}
       resizeMode={'cover'}
       shouldPlay={false}
+      rate={1}
       isLooping
       usePoster
       posterStyle={{ resizeMode: 'cover' }}
