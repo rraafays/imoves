@@ -1,61 +1,44 @@
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native'
+import { SafeAreaView, Text, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { Dimensions } from 'react-native'
-import Post from '../../components/post'
+import Single_Post from '../../components/post'
 import styles from './styles'
 import { getFeed } from '../../services/posts'
 
-export default function Feed_Screen() {
+export default function FeedScreen({ route }) {
+  const NAVBAR_HEIGHT = useBottomTabBarHeight()
+  const media_refs = useRef([])
   const array = [1, 2, 3, 4, 5, 6]
-  const [posts, setPosts] = useState([])
-  const mediaRefs = useRef([])
 
-  const x = useBottomTabBarHeight()
-
-  useEffect(() => {
-    getFeed().then(setPosts)
-  }, [])
-
-  const onViewableItemsChanged = useRef(({ changed }) => {
+  const on_viewable_items_changed = useRef(({ changed }) => {
     changed.forEach(element => {
-      const cell = mediaRefs.current[element.key]
+      const cell = media_refs.current[element.key]
       if (cell) {
-        if (element.isViewable) {
-          cell.play()
-        }
-        else {
-          cell.stop()
-        }
+        if (element.isViewable) { cell.play(); } else { cell.stop(); }
       }
     });
   })
 
-  const renderItem = ({ item, index }) => {
+  const render_item = ({ item, index }) => {
     return (
-      <View style={[{ flex: 1, height: Dimensions.get('window').height - x }, index % 2 === 0 ? { backgroundColor: 'red' } : { backgroundColor: 'black' }]}>
-        <Post item={item} ref={SinglePostRef => (mediaRefs.current[item.id] = SinglePostRef)} />
-      </View >
+      <SafeAreaView style={[{ flex: 1, height: Dimensions.get('window').height - NAVBAR_HEIGHT }, index % 2 ? { backgroundColor: 'black' } : { backgroundColor: 'white' }]}>
+        <Single_Post ref={Single_Post_Ref => (media_refs.current[item] = Single_Post_Ref)} />
+      </SafeAreaView>
     )
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
-        data={posts}
-        windowSize={4}
-        initialNumToRender={0}
-        maxToRenderPerBatch={4}
-        removeClippedSubviews
-        viewabilityConfig={{
-          itemVisiblePercentThreshold: 70
-        }}
-        renderItem={renderItem}
+        data={array}
+        renderItem={render_item}
         pagingEnabled={true}
-        keyExtractor={item => item.id}
-        onViewableItemsChanged={onViewableItemsChanged.current}
+        keyExtractor={item => item}
+        viewabilityConfig={{ itemVisiblePercentThreshold: 100 }}
+        onViewableItemsChanged={on_viewable_items_changed.current}
       />
-    </View>
+    </SafeAreaView>
   )
 }
