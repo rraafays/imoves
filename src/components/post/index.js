@@ -5,63 +5,30 @@ import styles from './styles'
 
 export const Single_Post = forwardRef(({ item }, parent_ref) => {
   const ref = useRef(null);
-  useImperativeHandle(parent_ref, () => ({
-    play,
-    unload,
-    stop
-  }))
+  useImperativeHandle(parent_ref, () => ({ play, unload, stop }))
 
-  useEffect(() => {
-    return () => unload();
-  }, [])
-
+  useEffect(() => { return () => unload(); }, [])
 
   const play = async () => {
-    if (ref.current == null) {
-      return;
-    }
-
-    // if video is already playing return
+    if (ref.current == null) { return; }
     const status = await ref.current.getStatusAsync();
-    if (status?.isPlaying) {
-      return;
-    }
-    try {
-      await ref.current.playAsync();
-    } catch (e) {
-      console.log(e)
-    }
+    if (status?.isPlaying) { return; }
+    try { await ref.current.playAsync(); }
+    catch (e) { console.log(e) }
   }
-
 
   const stop = async () => {
-    if (ref.current == null) {
-      return;
-    }
-
-    // if video is already stopped return
+    if (ref.current == null) { return; }
     const status = await ref.current.getStatusAsync();
-    if (!status?.isPlaying) {
-      return;
-    }
-    try {
-      await ref.current.stopAsync();
-    } catch (e) {
-      console.log(e)
-    }
+    if (!status?.isPlaying) { return; }
+    try { await ref.current.stopAsync(); }
+    catch (e) { console.log(e) }
   }
 
-
   const unload = async () => {
-    if (ref.current == null) {
-      return;
-    }
-
-    try {
-      await ref.current.unloadAsync();
-    } catch (e) {
-      console.log(e)
-    }
+    if (ref.current == null) { return; }
+    try { await ref.current.unloadAsync(); }
+    catch (e) { console.log(e) }
   }
 
   return (
