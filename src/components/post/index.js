@@ -37,7 +37,7 @@ export const Single_Post = forwardRef(({ item }, parent_ref) => {
       resizeMode={'cover'}
       shouldPlay={false}
       isLooping
-      source={{ uri: 'https://archive.org/download/mov-bbb/mov_bbb.mp4' }}
+      source={{ uri: item.media[0] }}
     />
   )
 })

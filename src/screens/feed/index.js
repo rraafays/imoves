@@ -5,16 +5,15 @@ import { FlatList } from 'react-native-gesture-handler'
 import { Dimensions } from 'react-native'
 import Single_Post from '../../components/post'
 import styles from './styles'
-import { getFeed } from '../../services/posts'
+import { get_feed } from '../../services/posts'
 
 export default function FeedScreen({ route }) {
-  const NAVBAR_HEIGHT = useBottomTabBarHeight()
+  const [posts, setPosts] = useState([])
   const media_refs = useRef([])
 
   useEffect(() => {
-
+    get_feed().then(setPosts)
   }, [])
-  const array = [1, 2, 3, 4, 5, 6]
 
   const on_viewable_items_changed = useRef(({ changed }) => {
     changed.forEach(element => {
@@ -28,18 +27,19 @@ export default function FeedScreen({ route }) {
   const render_item = ({ item, index }) => {
     return (
       <SafeAreaView style={[{ flex: 1, height: Dimensions.get('window').height - NAVBAR_HEIGHT }, index % 2 ? { backgroundColor: 'black' } : { backgroundColor: 'white' }]}>
-        <Single_Post ref={Single_Post_Ref => (media_refs.current[item] = Single_Post_Ref)} />
+        <Single_Post item={item} ref={Single_Post_Ref => (media_refs.current[item.id] = Single_Post_Ref)} />
       </SafeAreaView>
     )
   }
 
+  const NAVBAR_HEIGHT = useBottomTabBarHeight()
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={array}
+        data={posts}
         renderItem={render_item}
         pagingEnabled={true}
-        keyExtractor={item => item}
+        keyExtractor={item => item.id}
         viewabilityConfig={{ itemVisiblePercentThreshold: 100 }}
         onViewableItemsChanged={on_viewable_items_changed.current}
       />
