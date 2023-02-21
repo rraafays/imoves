@@ -1,12 +1,7 @@
 import firebase from "firebase";
 
-let commentListnerInstance = null
-/**
- * Returns all the posts in the database.
- *
- * @returns {Promise<[<Object>]>} post list if successful.
- */
-export const getFeed = () =>
+let comment_listner_instance = null
+export const get_feed = () =>
   new Promise((resolve, reject) => {
     firebase
       .firestore()
@@ -22,37 +17,24 @@ export const getFeed = () =>
       });
   });
 
-/**
- * Gets the like state of a user in a specific post
- * @param {String} postId - id of the post
- * @param {String} uid - id of the user to get the like state of.
- *
- * @returns {Promise<Boolean>} true if user likes it and vice versa.
- */
-export const getLikeById = (postId, uid) =>
+export const get_like_by_id = (post_id, uid) =>
   new Promise((resolve, reject) => {
     firebase
       .firestore()
       .collection("post")
-      .doc(postId)
+      .doc(post_id)
       .collection("likes")
       .doc(uid)
       .get()
       .then((res) => resolve(res.exists));
   });
 
-/**
- * Updates the like of a post according to the current user's id
- * @param {String} postId - id of the post
- * @param {String} uid - id of the user to get the like state of.
- * @param {Boolean} currentLikeState - true if the user likes the post and vice versa.
- */
-export const updateLike = (postId, uid, currentLikeState) => {
-  if (currentLikeState) {
+export const update_like = (post_id, uid, current_like_state) => {
+  if (current_like_state) {
     firebase
       .firestore()
       .collection("post")
-      .doc(postId)
+      .doc(post_id)
       .collection("likes")
       .doc(uid)
       .delete();
@@ -60,52 +42,43 @@ export const updateLike = (postId, uid, currentLikeState) => {
     firebase
       .firestore()
       .collection("post")
-      .doc(postId)
+      .doc(post_id)
       .collection("likes")
       .doc(uid)
       .set({});
   }
 };
 
-export const addComment = (postId, creator, comment) => {
+export const add_comment = (post_id, creator, comment) => {
   firebase.firestore()
     .collection('post')
-    .doc(postId)
+    .doc(post_id)
     .collection('comments')
-    .add({
-      creator,
-      comment,
-      creation: firebase.firestore.FieldValue.serverTimestamp(),
-    })
+    .add({ creator, comment, creation: firebase.firestore.FieldValue.serverTimestamp(), })
 }
 
-export const commentListner = (postId, setCommentList) => {
-  commentListnerInstance = firebase.firestore()
+export const comment_listner = (post_id, set_comment_list) => {
+  comment_listner_instance = firebase.firestore()
     .collection('post')
-    .doc(postId)
+    .doc(post_id)
     .collection('comments')
     .orderBy('creation', 'desc')
     .onSnapshot((snapshot) => {
-      if (snapshot.docChanges().length == 0) {
-        return;
-      }
+      if (snapshot.docChanges().length == 0) { return; }
       let comments = snapshot.docs.map((value) => {
         const id = value.id;
         const data = value.data();
         return { id, ...data }
       })
-      setCommentList(comments)
+      set_comment_list(comments)
     })
 }
 
-export const clearCommentListener = () => {
-  if (commentListnerInstance != null) {
-    commentListnerInstance();
-    commentListnerInstance = null
-  }
+export const clear_comment_listener = () => {
+  if (comment_listner_instance != null) { comment_listner_instance(); comment_listner_instance = null }
 }
 
-export const getPostsByUserId = (uid = firebase.auth().currentUser.uid) => new Promise((resolve, reject) => {
+export const get_posts_by_user_id = (uid = firebase.auth().currentUser.uid) => new Promise((resolve, reject) => {
   firebase.firestore()
     .collection('post')
     .where('creator', '==', uid)

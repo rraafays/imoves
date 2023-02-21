@@ -10,6 +10,10 @@ import { getFeed } from '../../services/posts'
 export default function FeedScreen({ route }) {
   const NAVBAR_HEIGHT = useBottomTabBarHeight()
   const media_refs = useRef([])
+
+  useEffect(() => {
+
+  }, [])
   const array = [1, 2, 3, 4, 5, 6]
 
   const on_viewable_items_changed = useRef(({ changed }) => {
