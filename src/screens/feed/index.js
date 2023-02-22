@@ -6,6 +6,7 @@ import { Dimensions } from 'react-native'
 import Single_Post from '../../components/post'
 import styles from './styles'
 import { get_feed } from '../../services/posts'
+import { StatusBar } from 'expo-status-bar';
 
 export default function FeedScreen({ route }) {
   const [posts, setPosts] = useState([])
@@ -35,6 +36,7 @@ export default function FeedScreen({ route }) {
   const NAVBAR_HEIGHT = useBottomTabBarHeight()
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style='light' />
       <FlatList
         data={posts}
         renderItem={render_item}
