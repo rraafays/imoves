@@ -26,9 +26,9 @@ export default function Add_Screen() {
 
   useEffect(() => {
     (async () => {
-      const camera = await Camera.requestPermissionsAsync()
+      const camera = await Camera.requestCameraPermissionsAsync()
       set_camera_permissions(camera.status == 'granted')
-      const audio = await Audio.requestPermissionsAsync()
+      const audio = await Camera.requestMicrophonePermissionsAsync()
       set_audio_permissions(audio.status == 'granted')
       const gallery = await ImagePicker.requestMediaLibraryPermissionsAsync()
       set_gallery_permissions(gallery.status == 'granted')
